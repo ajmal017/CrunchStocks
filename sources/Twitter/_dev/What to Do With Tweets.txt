@@ -1,0 +1,63 @@
+Multi-Step Process:
+	1.)  Pre-Processing:  Download and Save.
+
+	Build an interface where can type in a search term, hit Go, and n tweets will be fetched from Twitter and displayed on the screen.
+		Requirements:
+			Build an HTML interface with input text and buttons, and CSS with Tweet display style.
+			Use Ajax to call a PHP script that takes in q,n and calls the Twitter API.
+				Append the results to an existing CSV, until that file reaches a certain file size, then move to a new file.
+				Echo data onto screen and end the script.
+			*Use a separate PHP script to import all the CSVs into the database via MySQL.
+			The Ajax callback will read the CSV.
+	CLIENT SIDE:
+		Ajax.js, CSS styling, connect inputs with <script></script>
+	SERVER SIDE:
+		$tweets = Twitter::search("sdf",15);
+		$file = fopen("tweet_batch.csv","w");
+		foreach ($tweets as $line)  fputcsv($file,explode(',',$line));
+		fclose($file);
+		echo json_encode($tweets);
+
+	2.)  Tweet Processing.  For each part of the processing process, display the results on a table so that we can download and test the algorithm and make sure it's working on all normal cases of tweets.
+		Have an easy to use, interface where we can scroll through a list of tweets and their processed forms. And report errors with the step of the process.  Once that seems good, move to the next step.
+		
+		A.)  Tokenizing:  Goal to split the tweet into a 2-level array as shown:
+			"I went to the mall today and had fun.  Got home to find my [dog emoji] died [SAD EMOJI][CRYING EMOJI]".
+			[
+				[I, went, to, mall, today, and, had, fun],
+				[Got, home, to, find, my, DOG, died, SAD, CRYING]
+			]
+			Challenges:
+				1.  Split up sentences without just splitting by periods.
+				2.  Remove articles (stop words): the, a, an...
+				3.  What to do with puncuation?  keep as own word?  ["instead" , "," , "I" , "did" , "this"]
+				4.  Separate Emojis. and sometimes have to replace them with words they symbolize.
+		
+
+			 First split the tweet into ideas, separated by "." or ";" or other special words or punctuation.  Then split each idea into words leaving emoticons in their own places.
+
+			'\w+|\$[\d\.]+|\S+'
+			'\s+'
+			'[A-Z]\w+'
+
+		B.)  Classifying:  List out types of tweets we can use in Stock related field, then determine a separate sorting/processing algorithm for each type.
+			 Article:  "Apple fails to reach it's 52-week high http://www.hotnews.com/"
+			Off-topic:
+		C.)  Parts of speech/sentence structure.
+		D.)  Nots, won't, but, never, sarcasm, joke, etc...
+		E.) Different types of sentiment:  Good, Questionable, Unrelated, Unsure, Bad, Very Good, Very Bad, Very Good future, Very good now, very bad future, very bad now
+			Degree * Direction * When * Credibility * Volume (retweets, likes)..etc.
+			Sentiment Score:  [Extremely | Sort-of | ""][Good | Unsure | Bad][Now | Unsure | Future]
+		F.) Singular vs. plural detection.  Necessary?
+
+	3.)  Twitter User Rank:  determine a reliability rating on each relevant user to build a search list and trust weight.  Can generate lists of Twitter handles to lookout for, determine their credibility by number of followers handle name, number of tweets, consistency of relevant news...etc.
+		Example a handle called "@StockNewsUSA" could earn a high rank score and tweets written by it would have greater influence over other lower level, less developed Twitter users.  Could also use these lists to build news columns...etc.
+		Determine their use by counting and finding probability of each type of classification.  in processed-tweets table, in mysql have column for userid, and then for each classification which will hold a number representing the number of tweets collected that fit the requirements.
+			use a set data field: photo=1,news=1,parody=0,offtopic=0
+				Use aggregate function to count all by user
+			select count(photo, news) where user='stocknewsusa'
+			"of all __ tweets collected by __, _ included relevant photos a lot about stock market, _ had links to articles...etc."
+			news "tweets"
+
+	4.)  Build a terms list that are frequently found proper nouns (has capital letter), in the tweets by ___.
+		The most reliable search term to assume that a tweet is about AAPL is "$AAPL".  So search "$AAPL" and pull out common hash tags, proper nouns, etc. that occur in more than one tweet and rank them by their counts.  Then generate a list of "related terms: and related hashtags: that can be used to pull on AAPL other than just $AAPL...also if the volume is very high for $AAPL #bendgate in a specific timeframe (1 day), then try to determine if its just a buzz/trending tag and will unlink itself in the future.  or if its more long term like #aapl #iPhone and keeps more consistent volume.  though #iphone will have high volume aroudn september but lower volume later. So ttry to map it out on a calendar and if its been years since we've seen a bendgate, then we can just move on with that, keep it on the list but just for history,, not for new searches.

@@ -1,0 +1,59 @@
+<script>
+function invert(){
+	var a=arguments,
+		nrow=a.length,
+		ncol=a[0].length,
+		m=[];
+		
+	console.log('Size:',nrow,'x',ncol);
+	
+	for(var r=0;r<nrow;r++){
+		m[r]=[];
+		for(var c=0;c<ncol;c++)m[r][c]=r==c?1:0;
+	}
+	
+//	console.log(m[0],m[1]);
+	
+	//JORDAN: ROW ECHELON FORM
+	for(var i=0,j;i<nrow;i++){
+		j=a[i][i];
+		for(var c=0;c<ncol;c++){
+			a[i][c]/=j;
+			m[i][c]/=j;
+		}
+		//console.log(a[i],m[i]);
+
+		for(var y=i+1;y<nrow;y++){
+			b=-1*a[y][i];
+			for(var c=0;c<ncol;c++){
+				a[y][c]+=b*a[i][c];
+				m[y][c]+=b*m[i][c];
+			}
+		}
+		//console.log(m[0],m[1]);
+		//return
+	
+	}
+	//console.log.apply(console,m);
+
+	for(var z=nrow-1;z>0;z--){
+		//GAUSSEAN: REDUCED ROW ECHELON FORM
+		for(var x=0,j;x<nrow-1;x++){
+			j=-1*a[x][z];
+			//console.log(j,a[x],m[x]);
+			for(var c=0;c<ncol;c++){
+				a[x][c]+=a[z][c]*j;
+				m[x][c]+=m[z][c]*j;
+			}
+			//console.log(a[x],m[x]);
+		}
+			//return
+	}
+	console.log.apply(console,m);
+
+}
+
+//invert([2,-9],[-1,10]);
+invert([6,7,1],[5,-13,-1],[14,1,8]);
+//console.log(i);
+</script>

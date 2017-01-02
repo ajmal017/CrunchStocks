@@ -1,0 +1,35 @@
+Parts of Speech:
+coordinating conjunction
+cardinal digit
+determiner
+emoji
+existential there ("there is", "there are", "there exists")
+foreign word
+preposition/subordinating conjunction
+adjective ("big")
+adjective, comparative ("bigger")
+adjective, superlative ("biggest")
+list marker
+modal ("could", "might", "will")
+noun, singular ("desk")
+noun, plural ("desks")
+proper noun, singular ("Harrison")
+proper noun, plural ("Americans")
+predeterminer ("all the kids")
+possessive ending ("parent's")
+personal pronoun ("I", "he", "she")
+possessive pronoun ("my", "his", "hers")
+adverb ("very", "silently")
+adverb, comparative ("better")
+adverb, superlative ("best")
+particle ("give up")
+to (go "to" the store)
+interjection
+punctuation
+verb, base form ("take")
+verb, past tense ("took")
+verb, gerund/present participle ("taking")
+verb, 1st/2nd person, singular, present ("take")
+verb, 3rd person, singular , present ("takes")
+wh-determiner ("which")
+wh-pronoun ("who", "what")

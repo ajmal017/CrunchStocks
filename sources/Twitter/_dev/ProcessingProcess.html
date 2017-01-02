@@ -1,0 +1,32 @@
+<style>
+</style>
+<h1>The Tweet Processing Process:</h1>
+
+Subject: Apple Inc.
+
+Check for Definitions that will pull unrelated tweets.
+Apple Inc. -> subtract out company identifiers ("Corporation", "Inc", "Company")
+	look for common terms ("bank", ..) because the work bank shows up a lot and its many definitions will be commonly confused for lots of banks
+
+apple- a fruit... how to detect this kind of apple......find tweets with "apple" and sort out into 3 groups: fruit, company or niether.  Then look for common words..
+Then search specifically for tweets that contain something like "apple"+"fruit" and find words like "seed" or "doctor away" to strengthen the list. and use a bayesian probability model to guess chance that its a fruit or a company related tweet.
+Capital letters are important as long as not beginning of sentence (auto-capitalized), Apple will mean company while apple means fruit 999.9% of time
+<br><br>
+
+<select multiple>
+	<option></option>
+</select>
+
+<br><br>
+
+
+<div id="step1">
+	<span>Prepare:</span>Filter out links, hashtags, RT, @, put spaces between emojis, remove stop words (an, a, the).
+<div>
+
+<div id="step2">
+	<span>Classify:</span>
+<div>
+
+<script>
+</script>

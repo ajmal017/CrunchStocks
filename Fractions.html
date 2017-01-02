@@ -1,0 +1,21 @@
+<script>
+var x=11/16;
+console.log(fraction(x,4));
+
+function gcd(a,b){return b?gcd(b,a%b):a}
+
+function fraction(x,p){
+	var e=Math.pow(10,p),r=parseInt(x*e),f;
+	while((f=gcd(r,e))>1)r/=f,e/=f;
+	return r+"/"+e;
+}
+
+
+var x=11/16;
+function ndec(x){
+	for(var i=0;i<20;i++){
+		console.log(parseInt(x*=10),x);
+		//if(parseInt(x*=10)==x)break;return i
+	}
+}
+</script>
