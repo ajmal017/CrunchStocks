@@ -1,0 +1,77 @@
+<style>
+input,select{
+font-size:20px;
+border:2px solid black;
+border-radius:10px;
+background:#777;
+text-indent:0.2em;
+}
+
+</style>
+<form id=testWizard>
+	Variable Catagory: <select name=cat><option class='' value='v'>Fundamental Value</option><option value='ev'>ewwalue</option></select>
+	<br><br>
+	Test Variable: <select name=vari><option value='mc'>Market Cap</option></select>
+	
+	<br><br>
+	
+	Population Pool:
+		<input type=radio name=pool value=all checked>All
+		<input type=radio name=pool value=ind>Specific Industry
+		<input type=radio name=pool value=sec>Specific Sector
+		<input type=radio name=pool value=price>Price Range
+		<input type=radio name=pool value=custom>Custom Filter
+	
+	<br><br>
+	Sample Size: <input name=nsize type=number value=35 step=5 min=30 max=200>
+
+	<br><br>
+	[ALLOW FOR BLANKS AND NICELY STYLIZED BIG RADIO OPTION BUTTONS, AND SMART SEARCH INPUT SEARCH W/ AJAX DROPDOWN]
+	<br><br>
+	
+	Start Date: <input id=startDt type=date name=startDt>
+	<br><br>
+	End Date: <input id=endDt type=date name=endDt>
+	<br><br>
+		<input type=button value=Today> <input type=button value=Swap>
+	<br><br>
+	<input type=text name=perdesc placeholder='Period Description'>
+	<br><br>
+	<input type=text name=testtitle placeholder='Test Title'>
+	<br><br>
+	
+	<input class=submit type=button value=Generate>
+	512 encrypted ajax request just so we can guarentee that nothing was tampered with. it returns test ID or error message
+	<br><br>
+	Return summary, gives specific details on 
+	<br><br>
+	Pool Preview:
+		<div>RANDOMLY GENERATED POOL OF STOCKS, returned from server but only on click of button.'pool of 30' from 'industry: technology'.  Based on population set and sample size.</div>
+	<div id=errorWindow>Error:</div>
+	<input id=submitWizard type=button value=Submit>
+</form>
+
+<script src="../../js/AJAX.js"></script>
+<script>
+function Dt(s){var T=new Date(),D=s?new Date(T.getTime()+s):T,y=D.getYear()+1900,m=D.getMonth()+1,d=D.getDate();return y+"-"+(m<10?"0":"")+m+"-"+(d<10?"0":"")+d}
+
+Element.prototype.form=function(e){for(var t,n,r,i,o,a=0,l=this.querySelectorAll("input,select,textarea"),u={};a<l.length;a++)if(!((t=l[a]).disabled||""===(n=t.name)||n in u))if("INPUT"==(o=t.tagName)){if(""===(i=t.value)?t.required:!(t.pattern||/./).test(i))return"function"==typeof e?e(t,""===i):0;(("radio"==(r=t.type)||"checkbox"==r)&&t.checked||"submit"!=r&&"button"!=r)&&(u[n]=i)}else("SELECT"==o||"TEXTAREA"==o)&&(u[n]="SELECT"==o?t.options[t.selectedIndex].value:t.innerHTML);return u};
+
+
+//remake a form function one that works live, add event listener to each field so that when blur an input, we check if the value is an input, not disabled.., then append the value to the values object.
+
+Element.prototype.forming=function(r){
+	var V={};
+	var I=this.querySelectorAll('input,select,textarea');
+	for(var e,i=0;i<I.length;i++) I[i].addEventListener("change",function(){V[this.name]=this.value});
+	return V
+}
+
+
+document.getElementById('startDt').value=Dt(-2592000000);
+document.getElementById('endDt').value=Dt();
+
+var E=function(x,req){console.log((req?'Left empty but required: ':'Invalid Input: ')+x.name)};
+
+document.querySelector('#submitWizard').addEventListener("click",function(){var f=this.parentNode.form(E);typeof f=='object'?AJAX.simple("CreateTest",f,function(r){console.log(r)}):void(0)});
+</script>

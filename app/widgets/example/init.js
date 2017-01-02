@@ -1,0 +1,1 @@
+console.log("New instance of widget initialized!");

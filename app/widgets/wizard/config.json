@@ -1,0 +1,35 @@
+{"html":[{
+	"h1" : {
+		"id" : "wiz-title"
+	},
+	"_" : [
+		""
+	]
+},
+{
+	"div" : {
+		"id" : "pages"
+	},
+	"_" : [
+		{"div" : {"class" : "page"}, "_" : [
+			{"h4" : {"id":"instructions"}, "_" : [""]},
+			{"div" : {"id" : "survey"},
+				"_" : {
+					"a" : [
+						{"input" : {"type" : "radio", "name" : "exchange", "value" : ""}},
+						" ",
+						{"label" : {}, "_" : [""]},
+						{"br":{}}
+					]	
+				}
+			}
+		]}
+	]
+}],
+"css":{
+	"style" : null
+},
+"js":{
+	"load" : null
+}
+}

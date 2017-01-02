@@ -1,0 +1,53 @@
+<body>
+<h1>Define a New Data Resource:</h1>
+http://finance.yahoo.com/d/quotes.csv?s=GE+PTR+MSFT&f=snd1l1yr
+<br><br>
+Source Name: <input type="text" name="source" placeholder="(ex. Yahoo Fin)" value="YahooFin">
+<br>
+Title/Branch: <input type="text" name="title" placeholder="(ex. Historical)" value="Fundamentals">
+<br>
+Data Type: <select name="dataType"><option>json</option><option>xml</option><option selected=selected>csv</option></select>
+<br>
+BASE URL: <input type="text" name="baseurl" value="http://finance.yahoo.com/d/quotes.csv" style="width:230px;"> (DOES NOT EVER CHANGE, FOR ANY CALL)
+<br>
+?Parameters: <input type="checkbox" name="params" checked="checked">
+<input type="text" name="param-fields" value="s,f">
+<br>
+TYPES OF VALUE STRUCTURES
+	IMPLODE(separator, max, min=1)
+
+<table>
+	<tr><td>FIELD</td><td>DESCRIPTION</td><td>VALUE TYPE</td><td>VALUE POOL</td><td>BANNED VALUES</td><td>VALUE_STRUCTURE</td></tr>
+	<tr>
+		<td><input type="text" value="s"></td>
+		<td>Symbols List</td>
+		<td><select title="NOT A NAME= FORM-FIELD, JUST UI"><option selected="selected">$ALL_SYMBOLS</option><option>$FILTERED_SYMBOLS</option><option>Custom</option></select></td>
+		<td><input type="text" name="value_set[]" value=""></td>
+		<td><input type="text" name="banned_vals[]" value="SECTOR('PHARMA'),SECTOR('TECH')"></td>
+		<td>IMPLODE("+",200)</td>
+	</tr>
+	<tr>
+		<td><input type="text" value="f"></td>
+		<td>Variables to Lookup</td>
+		<td><select><option>Custom</option></select></td>
+		<td><input type="text" name="value_set[]" value=""></td>
+		<td><input type="text" name="banned_vals[]" value=""></td>
+		<td>IMPLODE("")</td>
+	</tr>
+</table>
+
+(POPUP MENU WHEN SETTING VALUE OF "s") $ALL_SYMBOLS
+<br>
+<H2>CONVERSIONS:</H2>
+<p>(get a .json file for all non A-Z characters found in the tickers.symbols column:  ex:  ^,-,... define these with a little description, and when testing this API before inserting it, we need to check if these ^ or - need to be converted to something else for this API)</p>
+<table>
+	<tr><td>Character</td><td>Meaning</td><td>Available</td><td>Converted</td></tr>
+	<tr><td>^</td><td></td>Class-stock<td><td><input type="checkbox"></td><input type="text" value="$"></td></tr>
+</table>
+
+<script>
+var methods={a:'Ask',a2:'Average Daily Volume',a5:'Ask Size',b:'Bid',b2:'Ask (Real-time)',b3:'Bid (Real-time)',b4:'Book Value',b6:'Bid Size',c:'Change & Percent Change',c1:'Change',c3:'Commission',c6:'Change (Real-time)',c8:'After Hours Change (Real-time)',d:'Dividend/Share',d1:'Last Trade Date',d2:'Trade Date',e:'Earnings/Share',e1:'Error Indication (returned for symbol changed / invalid)',e7:'EPS Estimate Current Year',e8:'EPS Estimate Next Year',e9:'EPS Estimate Next Quarter',f6:'Float Shares',g:'Day Low',h:'Day High',j:'52-week Low',k:'52-week High',g1:'Holdings Gain Percent',g3:'Annualized Gain',g4:'Holdings Gain',g5:'Holdings Gain Percent (Real-time)',g6:'Holdings Gain (Real-time)',i:'More Info',i5:'Order Book (Real-time)',j1:'Market Capitalization',j3:'Market Cap (Real-time)',j4:'EBITDA',j5:'Change From 52-week Low',j6:'Percent Change From 52-week Low',k1:'Last Trade (Real-time) With Time',k2:'Change Percent (Real-time)',k3:'Last Trade Size',k4:'Change From 52-week High',k5:'Percebt Change From 52-week High',l:'Last Trade (With Time)',l1:'Last Trade (Price Only)',l2:'High Limit',l3:'Low Limit',m:'Day Range',m2:'Day Range (Real-time)',m3:'50-day Moving Average',m4:'200-day Moving Average',m5:'Change From 200-day Moving Average',m6:'Percent Change From 200-day Moving Average',m7:'Change From 50-day Moving Average',m8:'Percent Change From 50-day Moving Average',n:'Name',n4:'Notes',o:'Open',p:'Previous Close',p1:'Price Paid',p2:'Change in Percent',p5:'Price/Sales',p6:'Price/Book',q:'Ex-Dividend Date',r:'P/E Ratio',r1:'Dividend Pay Date',r2:'P/E Ratio (Real-time)',r5:'PEG Ratio',r6:'Price/EPS Estimate Current Year',r7:'Price/EPS Estimate Next Year',s:'Symbol',s1:'Shares Owned',s7:'Short Ratio',t1:'Last Trade Time',t6:'Trade Links',t7:'Ticker Trend',t8:'1 yr Target Price',v:'Volume',v1:'Holdings Value',v7:'Holdings Value (Real-time)',w:'52-week Range',w1:'Day Value Change',w4:'Day Value Change (Real-time)',x:'Stock Exchange',y:'Dividend Yield'};
+
+
+</script>
+</body>

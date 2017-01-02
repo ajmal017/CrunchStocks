@@ -1,0 +1,41 @@
+<script>
+var Widget={
+	subs: {
+		"a": function(obj){console.log('Attributes', obj.attr);console.log('Texts', obj.text);},
+		"b": function(str){console.log('SET INSTRUCTIONS TO', str);}
+	
+	},
+	data: [
+		{"a":["AMEX", "NASDAQ", "NYSE"], "b":"Instructions"},
+		{"a":["AMEX2", "NASDAQ2", "NYSE2"], "b":"Instructions2"}
+	],
+	state: {
+		page: 0,
+		next: function(){this.write(++this.page)},
+		write: function(i){
+			var obj = Widget.data[i || this.page];
+			console.log(obj);
+			for(var k in obj) this.transform[k](obj[k]);
+			//for(var k in data) Widget.subs[k](data[k]);
+		},
+		transform: {
+			"a": function(arr){for(var a in arr){Widget.subs.a({attr: arr[a], text: arr[a]})}},
+			"b": function(str){Widget.subs.b(str)}
+			
+		
+		}
+		
+		
+	},
+	//prototype of Widget
+	call: function(name, method){
+		if(name=='demo') Widget.state[method].apply(null,[].slice.call(arguments, 2));
+	
+	}
+};
+
+for(var k in Widget.state) if(typeof Widget.state[k]==='function')Widget.state[k]=Widget.state[k].bind(Widget.state);
+
+Widget.call('demo', 'write');
+Widget.call('demo', 'next');
+</script>

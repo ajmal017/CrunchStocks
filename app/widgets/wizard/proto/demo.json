@@ -1,0 +1,9 @@
+{
+	"attr":[],
+	"text":["Import Symbols:", "Choose an exchange:"],
+	"data":[
+		{"a":["AMEX", "NASDAQ", "NYSE"], "b":"Instructions"},
+		{"a":["AMEX2", "NASDAQ2", "NYSE2"], "b":"Instructions2"}
+	]
+	
+}

@@ -1,0 +1,89 @@
+#heading{
+	-webkit-box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+	box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+}
+
+h1{
+    font-weight: bold;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.3);
+}
+
+#wiz-title{
+	-webkit-box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+	-moz-box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+	box-shadow: inset 0px -10px 15px 0px rgba(0,0,0,0.4);
+    font-weight: bold;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.3);
+	height:70px;
+	color: #fff;
+    background-color: #009688;
+	padding: 0.01em 16px;
+	font-size: 36px;
+	font-family: "Segoe UI",Arial,sans-serif;
+	margin: 0 0;
+}
+
+.page{
+	position:absolute;
+    top: 70px;
+    width: 100%;
+	background:white;
+}
+.page:nth-child(n+2){
+	left:100%;
+	animation: wipe-in-right 2s forwards;
+}
+
+@keyframes wipe-in-right{
+	from{left:100%;}
+	to{left:0;}
+}
+
+#wizard{
+    width: 500px;
+    position: absolute;
+    overflow: hidden;
+    height: 300px;
+}
+
+#instructions{
+padding: 0 16px;
+color: #009688;
+margin: 10px 0;
+font-weight:bold;
+}
+
+input[type=radio]{
+    width: 1.2em;
+    height: 1.2em;
+    position: relative;
+    top: .25em;
+}
+
+label.validate{color:#f44336}
+input:valid ~ label.validate{color:#009688}
+
+input[type=radio]:checked + label{color:#009688}
+
+label{font-weight:bold;}
+
+#survey{
+padding: 0 16px;
+}
+
+#next{
+color: #fff;
+background-color: #607d8b;
+margin: 16px;
+border: none;
+display: inline-block;
+outline: 0;
+padding: 6px 16px;
+vertical-align: middle;
+overflow: hidden;
+text-decoration: none;
+text-align: center;
+cursor: pointer;
+white-space: nowrap;
+}

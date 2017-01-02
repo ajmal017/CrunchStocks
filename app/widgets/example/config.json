@@ -1,0 +1,29 @@
+{"html":[{
+	"div" : {
+		"id" : "box",
+		"class" : "green",
+		"title" : ""
+	},
+	"_" : [
+		{"input" : {"name" : "exchange", "type" : "radio", "value" : "amex"}	},
+		{"label" : {"for" : "exchange", "className" : "peppermint"},
+			"_" : [
+				"labelll for ->",
+				""
+			]
+		},
+		{"span" : {"className" : "yoyo"},
+			"_" : [
+				{"img" : {}},
+				{"input" : {"type" : "button", "value" : ""}}
+			]
+		}
+	]
+}],
+"css":{
+	"style" : null
+},
+"js":{
+	"load" : null
+}
+}

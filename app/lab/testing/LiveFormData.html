@@ -1,0 +1,42 @@
+<form id=testWizard>
+	Variable Catagory: <select name=cat><option class='' value='v'>Fundamental Value</option><option value='ev'>ewwalue</option></select>
+	<br><br>
+
+	Population Pool:
+		<input type=radio name=pool value=all checked>All
+		<input type=radio name=pool value=ind>Specific Industry
+		<input type=radio name=pool value=sec>Specific Sector
+
+	<br><br>
+	Sample Size: <input name=nsize type=number value=35 step=5 min=30 max=200>
+
+	<br><br>
+	
+	Start Date: <input id=startDt type=date name=startDt>
+	<br><br>
+	End Date: <input id=endDt type=date name=endDt>
+	<br><br>
+		<input type=button value=Today> <input type=button value=Swap>
+	<br><br>
+	<input type=text name=perdesc placeholder='Period Description'>
+	<br><br>
+	
+	<textarea name=textArreaa>AA</textarea>
+	
+	<input id=submitWizard type=button value=Submit>
+</form>
+<script>
+//remake a form function one that works live, add event listener to each field so that when blur an input, we check if the value is an input, not disabled.., then append the value to the values object.
+
+//very simplified, loose version, work on it later, when feeling better, cause this is good, but bad
+//consider making this an object constructor, this.go = function(){AJAX.simple("Page1",V,alert)}, this.err = EERROR-CHECKING-THEN-IF-ERR-DO-INPUTTED-HANDLING-CB-FUNCTION
+Element.prototype.forming=function(){
+	var V={};
+	var I=this.querySelectorAll('input,select,textarea');
+	for(var e,i=0;i<I.length;i++) I[i].addEventListener("change",function(){V[this.name]=this.value;console.log(V)});
+	return V
+}
+
+var V = document.getElementById('testWizard').forming();
+
+</script>
