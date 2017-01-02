@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>Compatibility Demo</title>
+	
+</head>
+<body onload="App.init()">
+
+<script src="Compatch.js"></script>
+<script>
+var App=new (function(){
+	this.init=function(){console.log(Object.copy)}
+});
+</script>
+</body>

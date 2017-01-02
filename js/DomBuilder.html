@@ -1,0 +1,49 @@
+<body>
+<div id="target"></div>
+<div id="cont"></div>
+
+{a:[div],b:[a,span],c:[img,span],d:[img]}
+
+<script>
+(function(){
+	var D=document;
+	
+	var _=Dom=function(t,x){
+		var s=this;
+		s.$=D.createDocumentFragment();
+		s.tree(t,x);
+	};
+	
+	_.prototype.tree=function(q,x){
+		var t=this.$,s=q.replace(/([0-9^h]+)|>|\(|\)|\*/g," $& ").split(/\s+/),u=function(){g.push(document.createDocumentFragment());p.push(g[++i])},g=[t],p=[t],m=[],i=0,n=1,e,m;
+		for(var k in s)switch(s[k]){
+			case ">":p[i]=e;continue;
+			case "*":_.txt(x.shift(),p[i]);continue;	
+			case "(":m.push(n);n=1;u();continue;
+			case ")":while(0<m[i-1]--)_.copyTo(g[i],p[i-1]);--i;continue;
+			default:if(s[k]>0){n=s[k];continue}do p[i].appendChild(e=_.el(s[k]));while(--n >0);n++;
+		}
+	}
+	
+	_.prototype.doc=function(){return this.$.cloneNode(true)}
+	_.prototype.fill=function(q,p){var s=this;_.for(function(e){e.appendChild(s.doc())},q,p)}
+	
+	var E=_.one=function(q,p){return (p||D).querySelector(q)};
+	var Q=_.all=function(q,p){return (p||D).querySelectorAll(q)};
+	//_.is=function(e){return e instanceof Node?e:null}
+	_.copyTo=function(e,q,p){_.get(q,p).appendChild(e.cloneNode(true))};
+	_.el=function(t,a){var e=D.createElement(t);for(var b in a)e[b]=a[b];return e}
+	_.empty=function(q,p){_.for(function(){this.innerHTML=""},q,p)}
+	_.for=function(f,q,p){for(var e=Q(q,p),l=e.length,i=0;i<l;i++)f.call(e[i],e[i],i)};
+	_.evt=function(v,f,q,p){_.for(function(e){e.addEventListener(v,f)},q,p)};
+	//_.txt=function(t,q,p){_.get(q,p).appendChild(D.createTextNode(t))}
+	_.txt=function(t,e){e.appendChild(D.createTextNode(t))}
+	//_.get=function(q,p){return _.is(q)||E(q,p)}
+	//for, on, to...good words to use as prototypes
+})();
+
+
+var tree= new Dom("div>2(span>4(a>img)div)*table", ["Yo, table header here!"]);
+tree.fill("#target");
+</script>
+</body>

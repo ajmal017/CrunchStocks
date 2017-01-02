@@ -1,0 +1,42 @@
+<body>
+<script>
+(function(){
+var DOC=document,
+	FRAG=function(){return DOC.createDocumentFragment()},
+	_=Tree=function(struct, attr){
+		attr=attr || {};
+		var stack=struct.match(/\w+|>|<|\)|\(|'|\*|\^/g);
+		var x=0,n,
+			ele,
+			tag,
+			child,
+			parent=this.$=FRAG(),
+			path=function(ele){
+				switch(ele){
+					case ">": parent=parent.lastChild; continue;
+					case "<": parent=parent.parentNode; continue;
+					case "'": parent.lastChild.appendChild(DOC.createTextNode('Yoyo')); continue;
+					default: parent.appendChild(DOC.createElement(ele));
+				}
+				
+			};
+		while(ele=stack[x++]){
+			if(ele>1) for(n=parseInt(ele), child=build(FRAG()); n>0; n--) parent.appendChild(child);
+			else 
+	},
+	P=_.prototype;
+
+
+
+P.put=function(parent){
+	(parent||DOC.body).appendChild(this.$.cloneNode(true))
+};
+
+
+})();
+
+var alertBox=new Tree("div > h1 3 p ' < span");
+
+alertBox.put();
+</script>
+</body>
