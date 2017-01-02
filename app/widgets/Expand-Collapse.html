@@ -1,0 +1,36 @@
+<style>
+.example{
+	position: relative;
+	display: inline-block;
+	font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+    color: #292f33;
+}
+
+</style>
+
+
+<div class=example>
+	<span class=stays><span id=heading>This is a section</span><input class=button type=button value="Exp/Coll"></span>
+	<div id=content>
+		<img src="" alt="toggling content">
+		<div>
+			<p>
+				this stuff should expand and collapse..
+			</p>
+		</div>
+	</div>
+</div>
+
+<script>
+
+Element.prototype.group=function(stay,btn){
+	var s=document.querySelectorAll(stay),
+		b=document.querySelectorAll(btn);
+	
+	//click events here:
+
+
+}
+
+document.getElementById("example").group(".stays",".button");
+</script>
