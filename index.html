@@ -1,0 +1,237 @@
+<head>
+<base href="http://localhost/CrunchStocks/" target="_self">
+<link rel="stylesheet" type="text/css" href="nav.css">
+</head>
+
+<body>
+<div id="navbar">
+	<ul id="nav">
+		<li><a href="pages/profile.php" title="Profile" onclick="Ajax.link(0,'#main')">Profile</a></li>
+		<li><a href="pages/lab.php" title="Lab" onclick="Ajax.link(0,'#main')">Lab</a></li>
+		<li><a href="pages/portfolio.php" title="Portfolio" onclick="Ajax.link(0,'#main')">Portfolio</a></li>
+		<li><a class="sublink" href="pages/portfolio/place-trade.php" title="Place Trade" onclick="Ajax.link(0,'#main')">---Place Trade</a></li>
+		<li><a class="sublink" href="pages/portfolio/rules.php" title="Rules" data-js="sample.js" onclick="Ajax.link(1)">---Rules</a></li>
+		<li><a href="pages/settings.php" title="Settings" onclick="Ajax.link(0)">Settings</a></li>
+	</ul>
+</div>
+<div id="main">
+	Content Here!
+</div>
+<script>
+/*
+var UI=new(function(){
+	
+
+	this.level=function(o){
+		var _=this;
+		_.title= o.title || [];
+		_.name= o.name || [];
+		_.js= o.js || [];
+		_.css= o.css || [];
+	
+	}
+
+
+	{
+			name:'index',
+			js:['sample.js'],
+			css:['nav.css','home.css'],
+			vars:{
+				symbols:['AAPL']
+			},
+			title:'CrunchStocks',		
+		},
+		{
+			name:'landing',
+			title:'The coolest site ever!',
+			js:[],
+			css:[],
+			vars:{}
+		
+		}
+	];//key=level #, value= level data
+	
+});
+*/
+
+function Ajax(f,u,p){
+	var _=this;
+	_.$=new XMLHttpRequest;
+	_.url=u;
+	p===undefined || param.call(_,p);
+	_.$.addEventListener("load",function(){f(_.$.response)});
+}
+
+function param(o){var k,m;for(k in o)m='$'==k[0],this[m?'post':'get']+=k.substr(m)+'='+o[k]+'&'}
+
+
+Ajax.prototype.get="";
+Ajax.prototype.post="";
+Ajax.prototype.head={"Content-type":"application/x-www-form-urlencoded"};
+
+Ajax.prototype.go=function(){
+	var _=this,x=_.$,a;
+	x.open('POST',_.url+_.get,true);
+	for(var h in _.head)x.setRequestHeader(h,_.head[h]);
+	x.timeout=_.limit;
+	x.send(_.post);
+}
+
+//have mod be a separate function that modifies the stuff and then calls go.
+Ajax.prototype.nav=function(o){
+	event.preventDefault();
+	this.go();
+	console.log(o);
+	//history, doc title..etc.
+}
+
+Ajax.link=function(level,contain){
+	var e=event,
+		_=e.target,
+		c=document.querySelector(contain),//or go back to name attr.  needs +#main capability to add to innerHtml
+		x=new Ajax(function(r){c.innerHTML=r},_.href);
+	(e.onclick=x.nav.bind(x,levels[level]))();
+}
+
+Ajax.tabs=function(){}
+
+Ajax.search=function(){}
+/*
+var x=Ajax.index(...);
+	x('goo') -> already in, looks up 
+
+
+Ajax.index=function(i,found,notfound){
+	var index={},
+		x=new Ajax();
+		
+	return function(k){}
+}
+
+var getResults=new Ajax('search.php'),
+	searchResults=Ajax.index('q');
+*/
+
+HTMLElement.prototype.appendNew=function(tag,attr){
+	var e=document.createElement(tag);
+	for(var a in attr)e.setAttribute(a,attr[a]);
+	this.appendChild(e);
+	return e
+}
+
+
+var UI=new(function(){
+	var D=document,
+		B=D.body,
+		js=[], css={};
+	
+	//used as constructor
+	this.page=function(){
+		this.level=1;
+		this.title='SubPage title';
+		this.js='';
+		this.css='';
+	}
+	
+	this.js=function(u,k){
+		if(js.indexOf(k)+1)return;
+		k===undefined||js.push(k);
+		B.appendNew('script',{type: 'text/javascript', src: u, onload:'UI.loaded()', onerror: 'UI.failed()'});
+	}
+	
+	this.css=function(u,k){
+		Object.hasOwnProperty.call(css,k)?(css[k].href=u):(css[k]=B.appendNew('link',{rel: 'stylesheet', type: 'text/css', href: u}))
+		//NECESSARY?  return css[k]
+	}
+	
+	this.loaded=function(){
+		console.log('Loaded: ', event.target);
+	}
+	
+	this.failed=function(){
+		console.log('Failed to Load: ', event.target);
+	}
+	
+	this.title=function(l){
+		var t=UI.stage.title,
+			i=t.length,
+			a=arguments,
+			g=a.length-1,
+			k=0;
+		while(k<g) t[k+l] = a[++k];
+		if(i>l+g) t.splice(l+1,i-l-g+1);
+		document.title=(UI.stage.title=t).join(' | ');
+	}
+	
+	this.install=function(name){//gets a module by name and installs it.
+		//ajax(getModule.php?module=name)
+		//keep one script tag with id=installer...and just change the source, (script id=installer onload="alert('ModuleInstalled')" onerror="alert('Module failed to load')" src="yoModule.php")(/script)
+		
+		//example module, will be in JSON form, will contain dom structures, css/js paths, ajax functions or names of connector functions like uses: Ajax.search
+		/*{
+			js: INSTALLS FUNCTIONS TO MAKE IT WORK, LIKE Ajax.prototype.search, smartSearch, Index.js...etc.  needs to only be loaded once, the first time module is loaded
+			init: javascript code that connects the new elements to mouse events or other stuff like that, must be downloaded everytime module is loaded
+		
+		}*/
+	}
+	
+	this.remove=function(){//
+	
+	}
+	
+	this.stage={
+		//main:{
+			title: ['CrunchStocks','The Coolest Site Ever'],
+			theme:'theme-modern.css',
+			themes:{
+				modern: 'theme-modern.css',
+				water: 'water-theme.css',
+				wood: 'wood-theme.css',
+				sand: 'sand-theme.css'
+			},
+			_:{
+				//variables..				
+
+		//	}
+		},
+		landing:{
+
+		
+		
+		},
+		login:{
+			$:'#login',//query selector to find usiung querySelectorAll
+			_:{
+				user:'rebackt8',
+				email:'rebackt8@gmail.com',
+				firstname:'Tyler'
+			},
+		},
+		search:{
+			opts:{
+				what:{
+					tweets:1,
+					ticker:0,
+					charts:0
+				}
+			},
+			_:{//variables same as opts?
+				symbols:['AAPL']
+			},
+			js:['search.js'],
+
+			tree:new DocumentFragment,
+			ajax:{
+				
+			}
+		
+		},
+		pubnub:{
+			$: PUBNUB,
+			sub: ['twitter','statements','trade-hours']
+		}
+	};
+
+});
+</script>
+</body>
