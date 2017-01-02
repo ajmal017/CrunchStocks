@@ -1,0 +1,226 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('Montserrat.woff2') format('woff2'),url('Montserrat.woff') format('woff');
+  font-stretch:normal;
+  font-weight:normal;
+  font-style:normal;
+}
+
+body{
+background:#ccc;
+margin:0; padding:0;
+font-family:'Montserrat',Arial,sans-serif;
+font-size:18px;
+font-weight:bold;
+}
+
+#head{
+top:0; left:10px; right:10px;
+height:60px;
+padding:5px;
+border-top:none !important;
+border-radius:0 0 8px 8px;
+z-index:100;
+}
+
+#logo{
+position:absolute;
+height:58px; width:auto;
+vertical-align:middle;
+}
+
+#menu{
+position:absolute;
+left: 150px;
+right: 2px;
+top: 0;
+}
+
+#head .item{
+	position: relative;
+    display: inline-block;
+    float: right;
+    margin: 0 10px;
+    height: 60px;
+    padding: 5px 0;
+	width:48px;
+	transition:all 0.5s;
+}
+
+#head .item>img{
+    position: absolute;
+    display: block;
+    height: 60px;
+    right: 0;
+    cursor: pointer;
+}
+#head .item:hover>img{
+background: rgba(255,255,255,0.2);
+}
+
+#head .item:hover >div{
+height: 160px;
+padding:20px 20px;
+opacity:1;
+}
+
+#head .item>div{
+	position:fixed;
+    top: 72px;
+    display: block;
+	left:18px; right:18px;
+    height: 0;
+    padding: 0 20px;
+    opacity: 0;
+    overflow: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: rgba(25,60,65,0.9);
+    box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.4),inset 0px -4px 10px 4px rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,.9);
+    border-top: none;
+    transition: all 0.5s;
+}
+
+@media screen and (min-width: 360px){#head .item>div{position:absolute;width:212px;right:0;left:auto;}}
+
+.alert{
+position:fixed;
+left:20px;
+right:30px;
+top:90px;
+border-radius:8px;
+padding-bottom:30px;
+color:#000;
+background:#bda04c;
+text-shadow: .15em .15em .2em rgba(0,0,0,0.2);
+transition:opacity 1.2s ease-in-out;
+display:none;
+}
+
+.alert.alerting{
+display:block;
+animation: alerting 0.6s ease-in-out 3;
+}
+
+@keyframes alerting{
+    0%{right:30px;}
+    50%{right:40px;}
+    100%{right:30px;}
+}
+
+@media screen and (min-width: 400px){.alert{left:auto;width:360px;}}
+
+
+.alert>h1::before{
+position:absolute;
+border-bottom:1px solid black;
+left:-36px;
+width:35px;
+top:0;bottom:-1px;
+content:"";
+background-repeat:no-repeat;
+background-size:25px 25px;
+background-position:50% 50%;
+}
+
+.alert.pin{background:#3b9627 !important;}
+.alert.flag{background:#ffeb3b !important;}
+.alert.err{background:#bb3030 !important;}
+
+.alert.pin>h1::before{background-image:url(note-pin.png);}
+.alert.flag>h1::before{background-image:url(note-flag.png);}
+.alert.err>h1::before{background-image:url(note-err.png);}
+
+.alert>h1{
+position:relative;
+background:rgba(100,100,100,0.3);
+margin:0 0 0 35px;
+padding:8px 15px 8px 5px;
+border-left:1px solid black;
+border-bottom:1px solid black;
+line-height:22px;
+display:block;
+text-align:left;
+text-transform:uppercase;
+color: white;
+font-size:22px;
+text-shadow: 2px 2px 1px rgba(0,0,0,0.4);
+white-space:normal;
+}
+
+.alert>p{
+position:relative;
+display:none;
+padding:5px 10px;
+margin:0;
+background:rgba(255,255,255,0.2);
+white-space:normal;
+word-wrap:break-word;
+}
+
+.alert.expanded{}
+.alert.expanded>p{display:block;}
+
+.alert>span{
+position:absolute;
+display:block;
+height:30px;
+bottom:0;right:0;left:0;
+margin:0;padding:0;
+text-align:center;
+border-top:1px solid black;
+}
+
+.alert>span>a{
+position:relative;
+display:inline-block;
+margin:0 15px;
+padding:0 15px;
+color:black;
+line-height:30px;
+text-decoration:none;
+text-shadow: 2px 2px 1px rgba(100,100,100,0.2);
+cursor:pointer;
+}
+
+#content>div{
+display:block;
+background:rgba(20, 35, 30, 0.9);
+color:#fff;
+text-shadow:2px 1px 0px rgba(255,255,255,0.2);
+}
+
+#head,#foot,#content>div,.alert{
+border:2px solid black;
+-webkit-box-shadow:0px 0px 2px 2px rgba(0,0,0,0.4),inset 0px 0px 2px 1px rgba(255,255,255,0.3);
+-moz-box-shadow:0px 0px 2px 2px rgba(0,0,0,0.4),inset 0px 0px 2px 1px rgba(255,255,255,0.3);
+box-shadow:0px 0px 2px 2px rgba(0,0,0,0.4),inset 0px 0px 2px 1px rgba(255,255,255,0.3);
+}
+
+#content{
+background:transparent;
+margin:88px 30px 128px 30px;
+}
+
+#content>div{
+margin:1em 0;
+}
+
+#head,#foot{
+display:block;
+position:fixed;
+background:rgba(20, 35, 30, 0.9);
+color:#fff;
+text-shadow:2px 1px 0px rgba(255,255,255,0.2);
+}
+
+#foot{
+bottom:0; left:0; right:0;
+height:20px;
+padding:8px 10px 10px 10px;
+z-index:99;
+}
+
+#tools{position:absolute;}
+#toolgrip{display:inline-block;vertical-align:middle;margin-right:10px;}
