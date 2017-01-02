@@ -1,0 +1,75 @@
+input[type=file]{display:none;}
+input[type=file]+label{
+    display: block;
+    background: #222 url("btn_gray.jpg") center/cover no-repeat;
+    cursor: pointer;
+    color: #fff;
+    font: italic bold 1.2em/2em Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 6em;
+    height: 2em;
+    border: 0.2em solid black;
+    border-radius: 1em;
+}
+
+#queue .thumb:hover{background:rgb(104,104,104);}
+
+#queue .thumb{
+    position: relative;
+    height: 120px;
+    width: auto;
+    max-width: 290px;
+    display: block;
+    margin: 10 10;
+    padding: 4px 0;
+    background:rgb(84,84,84);
+	border: 3px solid black;
+    border-radius: 1em;
+}
+
+#queue .thumbImg{
+    position: absolute;
+    width: 88%;
+    max-width: 250px;
+    height: 88%;
+    left: 6%;
+    right: 6%;
+    top: 6%;bottom:6%;
+    cursor: pointer;
+}
+
+#queue .thumbExt{
+    position: absolute;
+    bottom: 0.4em;
+    left: 0.4em;
+    text-align: left;
+    text-indent: 0.3em;
+    text-transform: uppercase;
+	font: 0.8em/0.9em Arial, Helvetica, sans-serif;
+    color: rgb(255,255,255);
+    padding: 0.4em 0.2em;
+	border:0.1em solid white;
+	background:rgba(0,0,0,0.8);
+}
+
+#queue .thumb:hover .thumbName{opacity:1;}
+.thumbName{
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15%;
+    text-align: center;
+    width: 100%;
+    width: 100%;
+    text-indent: 0.3em;
+    text-transform: lowercase;
+    white-space: nowrap;
+	font: italic 0.9em/0.9em "Comic Sans MS", cursive, sans-serif;
+    color: white;
+    background: rgba(0,0,0,0.7);
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+    opacity: 0;
+}

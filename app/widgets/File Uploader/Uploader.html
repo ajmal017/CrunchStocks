@@ -1,0 +1,31 @@
+<base href="localhost://Dropbox/CrunchStocks/">
+<link rel="stylesheet" type="text/css" href="Uploader.css">
+
+<input type=file id="files" name="files" multiple>
+	<label for="files">Upload...</label>
+
+<div id=queue></div>
+
+<script src="js/DOM.js"></script>
+<script src="js/AJAX.js"></script>
+<script>
+var x=AJAX.set(function(r){console.log(r)},"Upload_Files"),
+	U=AJAX.incremental(x,function(o){console.log(o)}),
+	A=function(f,s){
+		var n=f.name,p=n.lastIndexOf("."),d=DOM.create("div",{className:"thumb"});
+			d.appendChild(DOM.create("img",{className:"thumbImg",src:s||"default.jpg"}));
+			d.appendChild(DOM.create("span",{className:"thumbName",innerHTML:n.substr(0,p)}));
+			d.appendChild(DOM.create("span",{className:"thumbExt",innerHTML:n.substr(p)}));
+		document.getElementById("queue").appendChild(d);
+	},
+	P=function(f){
+		var r="",s=26214400,t=["image"],e=["png","jpeg","jpg","gif"],m=Date.now()-94608000000;
+		if(f.size>s) r="File too Large.  Must be less than 25 MB.";
+		if(t.indexOf(f.type.substring(0,f.type.lastIndexOf("/")))==-1) r="File type not allowed.  You may only upload images.";
+		if(e.indexOf(f.name.substring(f.name.lastIndexOf(".")+1).toLowerCase())==-1) r="Unacceptable file extension.  Allowed extensions: "+e.join(", ");
+		if(f.lastModified<Math.abs(m)) r="File outdated.  Please upload a file modified in the past 3 years.";
+		return r?!void(alert(r)):0;
+	};
+
+document.getElementById("files").uploader(U,A,P);
+</script>
